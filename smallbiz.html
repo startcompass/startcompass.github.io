@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>소상공인 지원 · 창업나침반</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap">
+<style>
+  :root {
+    --night: #15122A;
+    --sky-top: #5E4FAE;
+    --sky-mid: #9A8AD8;
+    --sky-low: #E9C6D6;
+    --white: #FFFFFF;
+    --text: #EEEAFB;
+    --muted: #B3AACF;
+    --glass: rgba(255, 255, 255, .10);
+    --glass-line: rgba(255, 255, 255, .28);
+    --font: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --font-round: "Jua", "Gowun Dodum", sans-serif;
+    --accent: #B7EED2;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--night);
+    background-image:
+      radial-gradient(60% 40% at 15% 55%, rgba(123, 92, 220, .25), transparent 70%),
+      radial-gradient(50% 35% at 90% 80%, rgba(246, 200, 214, .12), transparent 70%);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+  .page {
+    max-width: 1100px; margin: 0 auto;
+    padding-block: 16px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid; gap: 64px;
+  }
+  h1, h2, h3 { margin: 0; font-family: var(--font-round); font-weight: 400; text-wrap: balance; }
+  p { margin: 0; }
+  ul, ol { margin: 0; padding: 0; list-style: none; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+  .hero {
+    position: relative; overflow: hidden; border-radius: 32px;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-low) 100%);
+    isolation: isolate;
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-round); font-size: 19px; color: var(--white); text-decoration: none; }
+  .logo svg { width: 26px; height: 26px; }
+  .nav-right { display: flex; align-items: center; gap: 18px; }
+  .nav-right .link { font-family: var(--font-round); color: rgba(255,255,255,.88); text-decoration: none; font-size: 15px; }
+  .nav-right .link:hover { color: var(--white); }
+  .nav-right .link[aria-current="page"] { color: var(--white); text-decoration: underline; text-underline-offset: 6px; }
+  @media (max-width: 900px) { .nav-right .link { display: none; } }
+  .pill-btn { font-family: var(--font-round); background: var(--white); color: #1B1730; border-radius: 999px; padding: 9px 18px; font-size: 14px; text-decoration: none; }
+  .hero-body { display: grid; justify-items: center; text-align: center; gap: 16px; padding: 48px 20px 72px; }
+  .orb {
+    width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle at 32% 28%, #FFFFFF 0 8%, #B7EED2 30%, #3B9E70 80%);
+    box-shadow: inset -8px -10px 18px rgba(0,0,0,.25), inset 6px 8px 14px rgba(255,255,255,.7), 0 12px 24px -8px rgba(0,0,0,.5);
+  }
+  .orb svg { width: 38px; height: 38px; }
+  .kicker { font-size: 13px; letter-spacing: .14em; color: rgba(255,255,255,.85); }
+  .headline { font-size: clamp(36px, 6vw, 68px); line-height: 1.1; color: var(--white); text-shadow: 0 6px 30px rgba(40,20,90,.35); }
+  .sub { color: rgba(255,255,255,.92); font-size: clamp(15px, 1.8vw, 18px); max-width: 32em; }
+
+  .sec { display: grid; gap: 28px; }
+  .sec-head { display: grid; gap: 8px; justify-items: center; text-align: center; }
+  .sec-head .kicker { color: var(--muted); }
+  .sec-head h2 { font-size: clamp(26px, 3.6vw, 40px); color: var(--white); }
+  .sec-head p { color: var(--muted); max-width: 34em; }
+
+  .glass {
+    background: var(--glass); border: 1px solid var(--glass-line); border-radius: 24px;
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 20px 50px -30px rgba(0,0,0,.8);
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .item { padding: 24px; display: grid; gap: 10px; align-content: start; background: linear-gradient(160deg, rgba(120,220,170,.2), rgba(255,255,255,.05)); }
+  .item .num { font-family: var(--font-round); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--white); color: #1B1730; }
+  .item h3 { font-size: 21px; color: var(--white); }
+  .item p { color: var(--muted); font-size: 14px; }
+  .item ul { display: grid; gap: 4px; font-size: 14px; padding-top: 10px; border-top: 1px solid var(--glass-line); }
+  .item li::before { content: "·"; margin-right: 6px; color: var(--white); }
+
+  .flow { padding: 28px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; counter-reset: f; }
+  .flow li { counter-increment: f; display: grid; gap: 6px; justify-items: center; text-align: center; }
+  .flow li::before {
+    content: counter(f); font-family: var(--font-round);
+    width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    background: linear-gradient(180deg, #FFFFFF, #D4D0E2); color: #1B1730; font-size: 18px;
+  }
+  .flow strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 17px; }
+  .flow span { color: var(--muted); font-size: 13px; }
+
+  .faq { display: grid; gap: 12px; }
+  .faq details { padding: 18px 22px; }
+  .faq summary { cursor: pointer; font-family: var(--font-round); color: var(--white); font-size: 17px; }
+  .faq details p { color: var(--muted); margin-top: 10px; font-size: 14px; }
+
+  .cta { padding: 40px 28px; display: grid; justify-items: center; text-align: center; gap: 16px; background: linear-gradient(160deg, rgba(154,138,216,.35), rgba(255,255,255,.05)); }
+  .cta h2 { font-size: clamp(24px, 3.4vw, 36px); color: var(--white); }
+  .cta p { color: var(--muted); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .btn { font-family: var(--font-round); border-radius: 999px; padding: 12px 22px; text-decoration: none; font-size: 15px; }
+  .btn.dark { background: #111018; color: var(--white); border: 1px solid var(--glass-line); }
+  .btn.light { background: var(--white); color: #1B1730; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; padding-top: 16px; border-top: 1px solid var(--glass-line); }
+
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 480px) {
+    .flow { grid-template-columns: minmax(0, 1fr); }
+    .hero-body { padding: 32px 4px 56px; }
+  }
+
+  .stage { padding: 28px; display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 28px; }
+  .stage-info { display: grid; gap: 10px; align-content: start; }
+  .badge { justify-self: start; font-family: var(--font-round); font-size: 13px; padding: 4px 12px; border-radius: 999px; color: #1B1730; background: var(--accent); }
+  .stage h3 { font-size: 26px; color: var(--white); line-height: 1.25; }
+  .stage-info p { color: var(--muted); font-size: 14px; }
+  .sessions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .sessions li {
+    display: grid; grid-template-columns: 38px minmax(0, 1fr); column-gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+  }
+  .sessions li::before {
+    content: attr(data-n);
+    font-family: var(--font-round); font-size: 13px; color: #1B1730;
+    width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; grid-row: span 2;
+    background: var(--white);
+  }
+  .sessions strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 15px; }
+  .sessions span { color: var(--muted); font-size: 13px; }
+  .stages { display: grid; gap: 20px; }
+  .who { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .who div { padding: 22px; display: grid; gap: 6px; }
+  .who strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 18px; }
+  .who span { color: var(--muted); font-size: 14px; }
+  @media (max-width: 900px) { .stage { grid-template-columns: minmax(0, 1fr); gap: 20px; } .who { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) { .sessions { grid-template-columns: minmax(0, 1fr); } .stage { padding: 22px 18px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <nav class="nav" aria-label="주 메뉴">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M16 5 L19.5 16 L12.5 16 Z" fill="#fff"/><path d="M16 27 L19.5 16 L12.5 16 Z" fill="#fff" opacity=".55"/></svg>
+        창업나침반
+      </a>
+      <div class="nav-right">
+        <a class="link" href="consulting.html">창업 컨설팅</a>
+        <a class="link" href="lecture.html">강의</a>
+        <a class="link" href="shop.html">쇼핑몰 창업</a>
+        <a class="link" href="smallbiz.html" aria-current="page">소상공인 지원</a>
+        <a class="pill-btn" href="index.html">← 홈으로</a>
+      </div>
+    </nav>
+    <div class="hero-body">
+      <div class="orb"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M3 9 L5 4 h14 l2 5 z"/><path d="M4 10 h16 v10 h-6 v-5 h-4 v5 H4 z"/></svg></div>
+      <p class="kicker">SMALL BUSINESS</p>
+      <h1 class="headline">소상공인 지원</h1>
+      <p class="sub">가게를 운영 중인 사장님과 함께 온라인 판로를 넓히고, 손님이 다시 찾는 가게를 만듭니다.</p>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="sec-head">
+      <p class="kicker">WHAT WE DO</p>
+      <h2>이런 것들을 함께 봅니다</h2>
+    </div>
+    <div class="grid">
+      <article class="glass item">
+        <span class="num">1</span>
+        <h3>온라인 판로 개척</h3>
+        <p>매장 밖에서도 팔 수 있는 길을 엽니다.</p>
+        <ul><li>스마트스토어 입점</li><li>배달·라이브커머스</li><li>온라인 상품 구성</li></ul>
+      </article>
+      <article class="glass item">
+        <span class="num">2</span>
+        <h3>매장 홍보</h3>
+        <p>손님이 검색해서 찾아오는 가게를 만듭니다.</p>
+        <ul><li>지도·플레이스 정비</li><li>인스타그램·블로그</li><li>리뷰 관리</li></ul>
+      </article>
+      <article class="glass item">
+        <span class="num">3</span>
+        <h3>운영 개선</h3>
+        <p>매출과 비용을 보며 운영을 다듬습니다.</p>
+        <ul><li>메뉴·상품 구성 점검</li><li>단골 관리</li><li>매출 흐름 살피기</li></ul>
+      </article>
+      <article class="glass item">
+        <span class="num">4</span>
+        <h3>지원 제도 활용</h3>
+        <p>사장님이 받을 수 있는 교육·지원을 찾아 드립니다.</p>
+        <ul><li>소상공인 지원사업 탐색</li><li>신청 서류 준비</li><li>교육 프로그램 연결</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <p class="kicker">CURRICULUM</p>
+      <h2>소상공인 지원 프로그램</h2>
+      <p>진단 → 개선 → 확장, 3단계 10회차로 진행합니다. 가게 상황에 맞춰 회차를 조정해요.</p>
+    </div>
+    <div class="stages">
+      <article class="glass stage">
+        <div class="stage-info">
+          <span class="badge">STEP 1</span>
+          <h3>진단</h3>
+          <p>지금 가게가 어디에 있는지 함께 점검합니다.</p>
+        </div>
+        <ol class="sessions">
+          <li data-n="01"><strong>매장 현황 점검</strong><span>매출·고객·운영 살펴보기</span></li>
+          <li data-n="02"><strong>상권 · 고객 분석</strong><span>우리 가게 손님은 누구일까</span></li>
+          <li data-n="03"><strong>온라인 노출 점검</strong><span>검색·지도·SNS에서 보이는 모습</span></li>
+        </ol>
+      </article>
+
+      <article class="glass stage">
+        <div class="stage-info">
+          <span class="badge">STEP 2</span>
+          <h3>개선</h3>
+          <p>손님이 찾고 다시 오도록 바로 바꿀 수 있는 것부터 합니다.</p>
+        </div>
+        <ol class="sessions">
+          <li data-n="04"><strong>지도 · 플레이스 정비</strong><span>사진·메뉴·영업 정보 정리</span></li>
+          <li data-n="05"><strong>리뷰 · 단골 관리</strong><span>후기가 쌓이고 다시 오게 하기</span></li>
+          <li data-n="06"><strong>SNS 홍보 시작</strong><span>사장님이 직접 하는 인스타그램</span></li>
+          <li data-n="07"><strong>메뉴 · 상품 구성</strong><span>잘 팔리는 구성으로 다듬기</span></li>
+        </ol>
+      </article>
+
+      <article class="glass stage">
+        <div class="stage-info">
+          <span class="badge">STEP 3</span>
+          <h3>확장</h3>
+          <p>매장 밖으로 판로를 넓혀 매출을 키웁니다.</p>
+        </div>
+        <ol class="sessions">
+          <li data-n="08"><strong>온라인 판매 시작</strong><span>스마트스토어·택배 상품 만들기</span></li>
+          <li data-n="09"><strong>배달 · 라이브커머스</strong><span>새로운 판매 채널 열기</span></li>
+          <li data-n="10"><strong>지원 제도 활용</strong><span>교육·자금 지원 찾아 신청하기</span></li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <p class="kicker">HOW IT WORKS</p>
+      <h2>이렇게 진행돼요</h2>
+    </div>
+    <ol class="glass flow">
+      <li><strong>상담</strong><span>가게 이야기 듣기</span></li>
+      <li><strong>현장 진단</strong><span>매장과 온라인 점검</span></li>
+      <li><strong>개선 실행</strong><span>함께 바꾸고 실습</span></li>
+      <li><strong>사후 점검</strong><span>변화 확인과 다음 단계</span></li>
+    </ol>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <p class="kicker">FOR YOU</p>
+      <h2>이런 분과 함께합니다</h2>
+    </div>
+    <div class="who">
+      <div class="glass"><strong>매장 사장님</strong><span>손님을 더 모으고 싶은 음식점·카페·가게</span></div>
+      <div class="glass"><strong>온라인이 낯선 분</strong><span>SNS나 스토어가 어렵게 느껴지는 분</span></div>
+      <div class="glass"><strong>상인회 · 지원기관</strong><span>상인 교육과 컨설팅이 필요한 곳</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <p class="kicker">FAQ</p>
+      <h2>자주 묻는 질문</h2>
+    </div>
+    <div class="faq">
+      <details class="glass"><summary>온라인을 하나도 몰라도 괜찮나요?</summary><p>네. 휴대폰으로 할 수 있는 것부터 천천히 같이 합니다.</p></details>
+      <details class="glass"><summary>매장으로 찾아와 주시나요?</summary><p>상황에 따라 매장 방문 상담도 가능합니다. 문의 주실 때 알려 주세요.</p></details>
+      <details class="glass"><summary>여러 가게가 함께 교육받을 수 있나요?</summary><p>네. 상인회나 기관 단위 교육도 진행합니다. 강의 페이지의 소상공인 디지털 전환 과정도 참고해 주세요.</p></details>
+    </div>
+  </section>
+
+  <section class="glass cta">
+    <p class="kicker">CONTACT</p>
+    <h2>우리 가게, 손님이 다시 찾게 만들어요</h2>
+    <p>지금 가게에서 가장 고민되는 것을 편하게 들려주세요.</p>
+    <div class="cta-row">
+      <a class="btn light" href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener">소상공인 지원 문의하기</a>
+      <a class="btn dark" href="index.html#contact">QR코드 보기</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 창업나침반</span>
+    <span>대표 임윤경</span>
+  </footer>
+</div>
+</body>
+</html>
