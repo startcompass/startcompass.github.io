@@ -1,0 +1,294 @@
+<title>창업나침반 파스텔</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Noto+Serif+KR:wght@600;900&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  /* Layout: 파스텔 네오 데코 벤토 그리드 — 라벤더빛 흰 바탕 위 파스텔 타일, 플럼 잉크와 아치·선버스트·스트라이프 장식 (밝은 단일 테마) */
+  :root {
+    --bg: #F7F5FB;
+    --tile: #FFFFFF;
+    --ink: #2B2440;
+    --muted: #6E6585;
+    --plum: #7A5BA8;
+    --line: rgba(122, 91, 168, .22);
+    --peach: #FBE2D5;
+    --butter: #FAF0C6;
+    --mint: #D8EFE2;
+    --sky: #DCE8F8;
+    --lilac: #E7DDF6;
+    --rose: #F6D3DE;
+    --font-display: "Noto Serif KR", "AppleMyungjo", "Batang", serif;
+    --font-deco: "Limelight", "Noto Serif KR", serif;
+    --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    word-break: keep-all;
+  }
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-block: 28px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid;
+    gap: 14px;
+  }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--plum); outline-offset: 3px; }
+
+  /* 상단 바 */
+  .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-block: 4px 10px; border-bottom: 1px solid var(--line); }
+  .mark { font-family: var(--font-deco); font-size: 20px; color: var(--plum); letter-spacing: .06em; }
+  .topbar nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+  .topbar nav a { text-decoration: none; }
+  .topbar nav a:hover { color: var(--ink); }
+
+  /* 벤토 */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+      "hero hero hero port"
+      "hero hero hero port"
+      "c1   c2   c3   c4"
+      "proc proc who  who"
+      "cta  cta  cta  cta";
+    gap: 14px;
+  }
+  .tile {
+    background: var(--tile);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .tile:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(43, 36, 64, .35); }
+
+  .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--plum); font-weight: 700; }
+
+  /* 히어로 */
+  .hero { grid-area: hero; display: grid; align-content: space-between; gap: 32px; padding-bottom: 0; background: linear-gradient(140deg, #FFFFFF 40%, var(--lilac)); }
+  .hero-top { display: grid; gap: 18px; }
+  .name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 92px);
+    line-height: .95;
+    letter-spacing: -.03em;
+    background: linear-gradient(180deg, var(--ink) 35%, var(--plum) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lead { font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 2.2vw, 24px); line-height: 1.5; max-width: 26em; }
+  .stripes {
+    height: 56px;
+    margin-inline: -28px;
+    background: repeating-linear-gradient(90deg,
+      var(--peach) 0 28px, var(--butter) 28px 56px, var(--mint) 56px 84px, var(--sky) 84px 112px, var(--rose) 112px 140px);
+    border-top: 1px solid var(--line);
+  }
+
+  /* 아치 초상 */
+  .port { grid-area: port; display: grid; align-content: end; gap: 16px; background: var(--sky); }
+  .arch {
+    aspect-ratio: 3 / 4;
+    max-width: 100%;
+    border-radius: 999px 999px 18px 18px;
+    border: 1.5px solid var(--plum);
+    padding: 8px;
+  }
+  .arch-in {
+    height: 100%;
+    border-radius: 999px 999px 12px 12px;
+    background:
+      radial-gradient(circle at 50% 100%, #FFFFFF 0 22%, transparent 22.5%),
+      repeating-conic-gradient(from -90deg at 50% 100%, var(--peach) 0 6deg, var(--lilac) 6deg 12deg);
+    display: grid; place-items: center;
+  }
+  .initials { font-family: var(--font-deco); font-size: clamp(40px, 5vw, 60px); color: var(--plum); }
+  .port-cap { display: grid; gap: 2px; }
+  .port-cap strong { font-family: var(--font-display); font-size: 18px; }
+  .port-cap span { color: var(--muted); font-size: 13px; }
+
+  /* 서비스 타일 */
+  .svc { display: grid; gap: 14px; align-content: start; }
+  .svc .num { font-family: var(--font-deco); font-size: 15px; color: var(--plum); }
+  .svc h3 { font-family: var(--font-display); font-weight: 900; font-size: 24px; line-height: 1.3; }
+  .svc p { color: var(--muted); font-size: 14px; }
+  .svc ul { display: grid; gap: 6px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; }
+  .svc li::before { content: "◆"; color: var(--plum); font-size: 9px; margin-right: 8px; vertical-align: 2px; }
+  .c1 { grid-area: c1; background: var(--peach); }
+  .c2 { grid-area: c2; background: var(--butter); }
+  .c3 { grid-area: c3; background: var(--mint); }
+  .c4 { grid-area: c4; background: var(--rose); }
+
+  /* 과정 */
+  .proc { grid-area: proc; display: grid; gap: 20px; }
+  .proc h2, .who h2, .cta h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(24px, 3vw, 32px); line-height: 1.3; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+  .steps li { counter-increment: s; display: grid; gap: 4px; align-content: start; }
+  .steps li::before {
+    content: counter(s);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--lilac); color: var(--plum);
+    display: grid; place-items: center;
+    font-family: var(--font-deco); font-size: 17px;
+    margin-bottom: 6px;
+  }
+  .steps strong { font-size: 16px; }
+  .steps span { font-size: 13px; color: var(--muted); }
+
+  /* 대상 */
+  .who { grid-area: who; display: grid; gap: 18px; align-content: start; background: var(--lilac); }
+  .who ul { display: grid; gap: 12px; }
+  .who li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .who li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .who strong { font-family: var(--font-display); font-size: 17px; white-space: nowrap; }
+  .who span { color: var(--muted); font-size: 14px; }
+
+  /* 문의 */
+  .cta {
+    grid-area: cta;
+    background: linear-gradient(120deg, var(--peach), var(--rose) 40%, var(--lilac) 75%, var(--sky));
+    border-color: transparent;
+    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: center;
+  }
+  .cta p { color: var(--muted); margin-top: 8px; }
+  .cta dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 20px; background: rgba(255, 255, 255, .6); padding: 20px 22px; border-radius: 16px; }
+  .cta dt { font-size: 13px; color: var(--muted); padding-top: 2px; }
+  .cta dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; padding-top: 10px; border-top: 1px solid var(--line); }
+  footer .mark { font-size: 15px; }
+
+  @media (max-width: 980px) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        "hero hero" "port c1" "c2 c3" "c4 who" "proc proc" "cta cta";
+    }
+    .port .arch { aspect-ratio: 4 / 5; }
+  }
+  @media (max-width: 640px) {
+    .bento { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "port" "c1" "c2" "c3" "c4" "proc" "who" "cta"; }
+    .tile { padding: 22px; border-radius: 20px; }
+    .stripes { margin-inline: -22px; }
+    .port { grid-template-columns: 120px minmax(0, 1fr); align-items: end; }
+    .steps { grid-template-columns: minmax(0, 1fr); }
+    .steps li { grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; }
+    .steps li::before { grid-row: span 2; margin: 0; }
+    .cta { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) { .tile { transition: none; } .tile:hover { transform: none; } }
+</style>
+
+<div class="page">
+  <header class="topbar">
+    <span class="mark">창업나침반</span>
+    <nav aria-label="바로가기">
+      <a href="#work">하는 일</a>
+      <a href="#process">진행 과정</a>
+      <a href="#contact">문의</a>
+    </nav>
+  </header>
+
+  <main class="bento">
+    <section class="tile hero">
+      <div class="hero-top">
+        <p class="eyebrow">창업 컨설턴트 · 강사</p>
+        <h1 class="name">창업나침반</h1>
+        <p class="lead">아이디어가 매출이 되기까지. 창업을 준비하는 분과 가게를 꾸려가는 사장님 곁에서 함께 길을 찾습니다.</p>
+      </div>
+      <div class="stripes" aria-hidden="true"></div>
+    </section>
+
+    <aside class="tile port">
+      <div class="arch"><div class="arch-in"><svg viewBox="0 0 100 100" style="width:clamp(72px,9vw,112px);height:auto" role="img" aria-label="나침반"><circle cx="50" cy="50" r="46" style="fill:#FFFFFF;stroke:var(--plum);stroke-width:2"/><circle cx="50" cy="50" r="37" style="fill:none;stroke:var(--plum);stroke-width:1;opacity:.4"/><path d="M14 50 L50 45 L86 50 L50 55 Z" style="fill:var(--lilac)"/><path d="M50 12 L57 50 L43 50 Z" style="fill:var(--plum)"/><path d="M50 88 L57 50 L43 50 Z" style="fill:var(--peach);stroke:var(--plum);stroke-width:1"/><circle cx="50" cy="50" r="4" style="fill:#FFFFFF;stroke:var(--plum);stroke-width:2"/></svg></div></div>
+      <div class="port-cap">
+        <strong>창업나침반</strong>
+        <span>대표 임윤경 · 창업 컨설팅 · 대학 강의 · 쇼핑몰 창업 · 소상공인 지원</span>
+      </div>
+    </aside>
+
+    <article class="tile svc c1" id="work">
+      <span class="num">I</span>
+      <h3>창업 컨설팅</h3>
+      <p>아이템 검증부터 사업계획서, 지원사업 준비까지 창업 초기를 함께 정리합니다.</p>
+      <ul><li>아이템 점검·시장 분석</li><li>사업계획서 코칭</li><li>창업 지원사업 준비</li></ul>
+    </article>
+
+    <article class="tile svc c2">
+      <span class="num">II</span>
+      <h3>대학 강의</h3>
+      <p>현장에서 겪은 사례로 바로 써먹을 수 있는 창업 수업을 합니다.</p>
+      <ul><li>창업 기초·비즈니스 모델</li><li>온라인 쇼핑몰 운영 실무</li><li>학생 창업 프로젝트 지도</li></ul>
+    </article>
+
+    <article class="tile svc c3">
+      <span class="num">III</span>
+      <h3>쇼핑몰 창업</h3>
+      <p>상품 소싱부터 스토어 개설, 상세페이지, 마케팅까지 단계별로 안내합니다.</p>
+      <ul><li>스마트스토어·자사몰 개설</li><li>상품 기획·상세페이지</li><li>광고·SNS 마케팅 기초</li></ul>
+    </article>
+
+    <article class="tile svc c4">
+      <span class="num">IV</span>
+      <h3>소상공인 지원</h3>
+      <p>가게를 운영 중인 사장님과 온라인 판로 확대, 운영 개선을 함께 찾습니다.</p>
+      <ul><li>온라인 판로 개척</li><li>매장 운영·홍보 개선</li><li>교육과 1:1 상담</li></ul>
+    </article>
+
+    <section class="tile proc" id="process">
+      <p class="eyebrow">진행 과정</p>
+      <h2>상담부터 성장까지</h2>
+      <ol class="steps">
+        <li><strong>상담</strong><span>지금 상황과 목표를 듣습니다</span></li>
+        <li><strong>진단</strong><span>아이템·시장·강점을 점검합니다</span></li>
+        <li><strong>계획</strong><span>사업계획과 일정을 세웁니다</span></li>
+        <li><strong>실행</strong><span>오픈·지원사업·홍보를 시작합니다</span></li>
+        <li><strong>성장</strong><span>매출을 보며 다음 단계로</span></li>
+      </ol>
+    </section>
+
+    <section class="tile who">
+      <p class="eyebrow">이런 분과 함께합니다</p>
+      <ul>
+        <li><strong>예비 창업자</strong><span>아이디어는 있는데 어디서부터 시작할지 모르는 분</span></li>
+        <li><strong>온라인 판매 입문자</strong><span>내 상품으로 쇼핑몰을 열고 싶은 분</span></li>
+        <li><strong>소상공인 사장님</strong><span>매장을 넘어 판로를 넓히고 싶은 분</span></li>
+      </ul>
+    </section>
+
+    <section class="tile cta" id="contact">
+      <div>
+        <p class="eyebrow">상담 · 강의 문의</p>
+        <h2>시작이 막막하다면, 편하게 연락 주세요.</h2>
+        <p>창업 상담, 강의 요청, 소상공인 교육 문의를 받습니다.</p>
+      </div>
+      <dl>
+        <dt>이메일</dt><dd>이메일 주소를 입력하세요</dd>
+        <dt>연락처</dt><dd>전화번호를 입력하세요</dd>
+        <dt>블로그·SNS</dt><dd>주소를 입력하세요</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer>
+    <span class="mark">창업나침반</span>
+    <span>© 창업나침반</span>
+  </footer>
+</div>
