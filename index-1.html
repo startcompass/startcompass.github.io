@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>창업나침반</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap">
+<style>
+  /* Layout: 보랏빛 하늘 히어로(3D 유리 큐브·모래 언덕·산호·크롬 필) → 어두운 바탕의 유리 카드 → 구불구불한 길 위 5단계 → 유리 문의 패널 (단일 테마) */
+  :root {
+    --night: #15122A;
+    --night-2: #1F1A3D;
+    --sky-top: #5E4FAE;
+    --sky-mid: #9A8AD8;
+    --sky-low: #E9C6D6;
+    --sand: #EBD5B2;
+    --white: #FFFFFF;
+    --text: #EEEAFB;
+    --muted: #B3AACF;
+    --glass: rgba(255, 255, 255, .10);
+    --glass-line: rgba(255, 255, 255, .28);
+    --emerald: #3FD08A;
+    --font: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --font-round: "Jua", "Gowun Dodum", sans-serif;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  img { max-width: 100%; }
+  body {
+    margin: 0;
+    background: var(--night);
+    background-image:
+      radial-gradient(60% 40% at 15% 55%, rgba(123, 92, 220, .25), transparent 70%),
+      radial-gradient(50% 35% at 90% 80%, rgba(63, 208, 138, .12), transparent 70%);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.65;
+    word-break: keep-all;
+  }
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-block: 16px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid;
+    gap: 72px;
+  }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  ul, ol { margin: 0; padding: 0; list-style: none; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+  /* ───── 히어로 ───── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 32px;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 48%, var(--sky-low) 78%, var(--sand) 100%);
+    min-height: 600px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    isolation: isolate;
+  }
+  .nav {
+    position: relative; z-index: 3;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 20px 24px;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 18px; color: var(--white); text-decoration: none; }
+  .logo svg { width: 26px; height: 26px; }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; color: rgba(255, 255, 255, .85); }
+  .nav-links a { text-decoration: none; }
+  .nav-links a:hover { color: var(--white); }
+  .pill-btn { background: var(--white); color: #1B1730; border-radius: 999px; padding: 9px 18px; font-weight: 700; font-size: 14px; text-decoration: none; }
+
+  .hero-body {
+    position: relative; z-index: 3;
+    display: grid; justify-items: center; align-content: start; text-align: center;
+    gap: 18px;
+    padding: 64px 20px 230px;
+  }
+  .kicker { font-size: 13px; letter-spacing: .14em; color: rgba(255, 255, 255, .85); font-weight: 500; }
+  .headline {
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 84px);
+    line-height: 1.05;
+    letter-spacing: -.03em;
+    color: var(--white);
+    text-shadow: 0 6px 30px rgba(40, 20, 90, .35);
+  }
+  .sub { color: rgba(255, 255, 255, .92); font-size: clamp(15px, 1.8vw, 18px); max-width: 30em; text-shadow: 0 2px 12px rgba(40, 20, 90, .3); }
+
+  /* 크롬 필 */
+  .chrome {
+    margin-top: 10px;
+    width: min(560px, 100%);
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 7px 7px 20px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #D4D0E2 30%, #F7F6FB 48%, #A9A4BE 72%, #ECEAF3 100%);
+    box-shadow: 0 18px 40px -12px rgba(30, 20, 70, .55), inset 0 1px 0 #fff, inset 0 -2px 6px rgba(60, 50, 100, .25);
+    color: #3B3554;
+    text-decoration: none;
+  }
+  .chrome svg { width: 18px; height: 18px; flex: none; }
+  .chrome span { flex: 1; min-width: 0; text-align: left; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chrome b { background: #111018; color: var(--white); border-radius: 999px; padding: 11px 20px; font-size: 14px; flex: none; }
+
+  /* 3D 큐브 */
+  .cubes { position: absolute; inset: 0; z-index: 2; perspective: 900px; pointer-events: none; }
+  .float { position: absolute; animation: bob 7s ease-in-out infinite; }
+  .cube { --s: 60px; width: var(--s); height: var(--s); position: relative; transform-style: preserve-3d; animation: spin 22s linear infinite; }
+  .cube i {
+    position: absolute; inset: 0;
+    border: 1px solid rgba(255, 255, 255, .75);
+    background: linear-gradient(135deg, rgba(160, 255, 200, .65), rgba(20, 130, 80, .7));
+    box-shadow: inset 0 0 14px rgba(255, 255, 255, .45);
+  }
+  .cube.chrome-c i {
+    background:
+      linear-gradient(90deg, transparent 32%, rgba(255,255,255,.55) 33% 34%, transparent 35% 65%, rgba(255,255,255,.55) 66% 67%, transparent 68%),
+      linear-gradient(0deg, transparent 32%, rgba(255,255,255,.55) 33% 34%, transparent 35% 65%, rgba(255,255,255,.55) 66% 67%, transparent 68%),
+      linear-gradient(135deg, #FFFFFF, #BDB8CF 40%, #6F6A86 62%, #F0EEF6);
+  }
+  .cube.emerald-c i {
+    background:
+      linear-gradient(90deg, transparent 32%, rgba(255,255,255,.4) 33% 34%, transparent 35% 65%, rgba(255,255,255,.4) 66% 67%, transparent 68%),
+      linear-gradient(0deg, transparent 32%, rgba(255,255,255,.4) 33% 34%, transparent 35% 65%, rgba(255,255,255,.4) 66% 67%, transparent 68%),
+      linear-gradient(135deg, rgba(170, 255, 205, .8), rgba(18, 120, 70, .85));
+  }
+  .cube i:nth-child(1) { transform: translateZ(calc(var(--s) / 2)); }
+  .cube i:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
+  .cube i:nth-child(3) { transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); }
+  .cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
+  .cube i:nth-child(5) { transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); }
+  .cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
+  @keyframes spin { from { transform: rotateX(-24deg) rotateY(0deg); } to { transform: rotateX(-24deg) rotateY(360deg); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+  .f1 { left: 7%;  top: 18%; } .f1 .cube { --s: 92px; }
+  .f2 { right: 8%; top: 14%; animation-delay: -2s; } .f2 .cube { --s: 104px; animation-duration: 28s; }
+  .f3 { left: 22%; top: 62%; animation-delay: -4s; } .f3 .cube { --s: 26px; animation-duration: 12s; }
+  .f4 { right: 24%; top: 58%; animation-delay: -1s; } .f4 .cube { --s: 30px; animation-duration: 14s; }
+  .f5 { right: 4%;  top: 52%; animation-delay: -3s; } .f5 .cube { --s: 22px; animation-duration: 10s; }
+  .f6 { left: 34%; top: 12%; animation-delay: -5s; } .f6 .cube { --s: 18px; animation-duration: 9s; }
+
+  /* 모래 언덕과 산호 */
+  .ground { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; width: 100%; height: 240px; }
+
+  /* ───── 섹션 공통 ───── */
+  .sec { display: grid; gap: 28px; }
+  .sec-head { display: grid; gap: 8px; justify-items: center; text-align: center; }
+  .sec-head .kicker { color: var(--muted); }
+  .sec-head h2 { font-weight: 900; font-size: clamp(28px, 4vw, 44px); letter-spacing: -.02em; color: var(--white); }
+  .sec-head p { color: var(--muted); max-width: 34em; }
+
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-line);
+    border-radius: 24px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 20px 50px -30px rgba(0, 0, 0, .8);
+  }
+
+  /* 서비스 카드 */
+  .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .card { padding: 22px; display: grid; gap: 14px; align-content: start; min-width: 0; transition: transform .25s ease; }
+  .card:hover { transform: translateY(-4px); }
+  .card .tag { font-size: 12px; color: var(--muted); letter-spacing: .08em; }
+  .card h3 { font-size: 20px; font-weight: 700; color: var(--white); }
+  .card p { font-size: 14px; color: var(--muted); }
+  .card ul { display: grid; gap: 4px; font-size: 14px; padding-top: 12px; border-top: 1px solid var(--glass-line); }
+  .card li::before { content: "·"; margin-right: 6px; color: var(--white); }
+  .t-rose  { background: linear-gradient(160deg, rgba(246, 200, 214, .28), rgba(255, 255, 255, .06)); }
+  .t-amber { background: linear-gradient(160deg, rgba(212, 166, 92, .32), rgba(255, 255, 255, .05)); }
+  .t-lilac { background: linear-gradient(160deg, rgba(178, 156, 240, .32), rgba(255, 255, 255, .06)); }
+  .t-mint  { background: linear-gradient(160deg, rgba(120, 220, 170, .26), rgba(255, 255, 255, .05)); }
+
+  .orb {
+    width: 76px; height: 76px; border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: inset -8px -10px 18px rgba(0, 0, 0, .25), inset 6px 8px 14px rgba(255, 255, 255, .7), 0 12px 24px -8px rgba(0, 0, 0, .5);
+  }
+  .orb svg { width: 34px; height: 34px; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .25)); }
+  .o-rose  { background: radial-gradient(circle at 32% 28%, #FFFFFF 0 8%, #F4C3D3 30%, #C77E9E 80%); }
+  .o-amber { background: radial-gradient(circle at 32% 28%, #FFFFFF 0 8%, #F2D49A 30%, #B07F2E 80%); }
+  .o-lilac { background: radial-gradient(circle at 32% 28%, #FFFFFF 0 8%, #CDBDF6 30%, #7C62C9 80%); }
+  .o-mint  { background: radial-gradient(circle at 32% 28%, #FFFFFF 0 8%, #B7EED2 30%, #3B9E70 80%); }
+
+  /* 길 위의 과정 */
+  .road-wrap { padding: 8px 8px 24px; overflow: hidden; }
+  .road { display: block; width: 100%; height: auto; }
+  .steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; padding-inline: 16px; counter-reset: s; }
+  .steps li { counter-increment: s; display: grid; gap: 4px; text-align: center; justify-items: center; }
+  .steps li::before {
+    content: counter(s);
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--white); color: #1B1730; font-weight: 900; font-size: 15px;
+  }
+  .steps strong { color: var(--white); font-size: 16px; }
+  .steps span { color: var(--muted); font-size: 13px; }
+
+  /* 대상 */
+  .who { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .who div { padding: 22px; display: grid; gap: 6px; }
+  .who strong { color: var(--white); font-size: 17px; }
+  .who span { color: var(--muted); font-size: 14px; }
+
+  /* 문의 */
+  .contact { padding: 40px 28px; display: grid; justify-items: center; text-align: center; gap: 16px; background: linear-gradient(160deg, rgba(154, 138, 216, .35), rgba(255, 255, 255, .05)); }
+  .contact h2 { font-weight: 900; font-size: clamp(26px, 3.6vw, 38px); color: var(--white); }
+  .contact p { color: var(--muted); }
+  .contact dl { margin: 6px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 20px; text-align: left; }
+  .contact dt { color: var(--muted); font-size: 13px; padding-top: 2px; }
+  .contact dd { margin: 0; font-weight: 500; color: var(--white); overflow-wrap: anywhere; }
+
+  /* 동글동글한 제목 폰트 */
+  .logo, .headline, .sec-head h2, .card h3, .contact h2, .pill-btn, .chrome b,
+  .steps strong, .steps li::before, .who strong, .nav-links a, .card .more {
+    font-family: var(--font-round);
+    font-weight: 400;
+  }
+  .card .more { justify-self: start; margin-top: 4px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.9); color: #1B1730; font-size: 14px; text-decoration: none; }
+  .card .more:hover { background: var(--white); }
+
+  .kakao { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; text-align: left; margin-top: 8px; padding: 20px; border-radius: 24px; background: rgba(255,255,255,.08); border: 1px solid var(--glass-line); max-width: 520px; width: 100%; }
+  .kakao a.qr { display: block; width: 160px; padding: 10px; border-radius: 18px; background: #fff; box-shadow: 0 14px 30px -14px rgba(0,0,0,.7); }
+  .kakao a.qr img { display: block; width: 100%; height: auto; }
+  .kakao-txt { display: grid; gap: 10px; justify-items: start; }
+  .kakao-txt strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 20px; }
+  .kakao-txt span { color: var(--muted); font-size: 14px; }
+  .kakao-btn { font-family: var(--font-round); display: inline-flex; align-items: center; gap: 8px; background: #FEE500; color: #191600; border-radius: 999px; padding: 11px 20px; text-decoration: none; font-size: 15px; }
+  .kakao-btn svg { width: 18px; height: 18px; }
+  @media (max-width: 600px) { .kakao { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; } .kakao-txt { justify-items: center; } }
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; padding-top: 16px; border-top: 1px solid var(--glass-line); }
+
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .who { grid-template-columns: minmax(0, 1fr); }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .page { gap: 56px; }
+    .hero { min-height: 0; border-radius: 24px; }
+    .hero-body { padding: 48px 4px 200px; }
+    .f1 { left: -6%; top: 64%; } .f1 .cube { --s: 60px; }
+    .f2 { right: -4%; top: 60%; } .f2 .cube { --s: 64px; }
+    .f3, .f6 { display: none; }
+    .chrome { padding-left: 14px; }
+    .chrome b { padding: 10px 14px; }
+    .cards { grid-template-columns: minmax(0, 1fr); }
+    .steps { grid-template-columns: minmax(0, 1fr); text-align: left; }
+    .steps li { grid-template-columns: 34px minmax(0, 1fr); justify-items: start; column-gap: 12px; text-align: left; }
+    .steps li::before { grid-row: span 2; }
+    .contact { padding: 32px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .float, .cube { animation: none; }
+    .cube { transform: rotateX(-24deg) rotateY(35deg); }
+    .card { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <nav class="nav" aria-label="주 메뉴">
+      <a class="logo" href="#top">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M16 5 L19.5 16 L12.5 16 Z" fill="#fff"/><path d="M16 27 L19.5 16 L12.5 16 Z" fill="#fff" opacity=".55"/></svg>
+        창업나침반
+      </a>
+      <div class="nav-links">
+        <a href="consulting.html">창업 컨설팅</a>
+        <a href="lecture.html">강의</a>
+        <a href="shop.html">쇼핑몰 창업</a>
+        <a href="smallbiz.html">소상공인 지원</a>
+        <a href="#services">서비스</a>
+        <a href="#process">진행 과정</a>
+        <a href="#who">함께하는 분</a>
+      </div>
+      <a class="pill-btn" href="#contact">상담 문의</a>
+    </nav>
+
+    <div class="cubes" aria-hidden="true">
+      <div class="float f1"><div class="cube emerald-c"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float f2"><div class="cube chrome-c"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float f3"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float f4"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float f5"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float f6"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    </div>
+
+    <svg class="ground" viewBox="0 0 1200 240" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="dune1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3E1C4"/><stop offset="1" stop-color="#D9BC92"/></linearGradient>
+        <linearGradient id="dune2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CFA8"/><stop offset="1" stop-color="#C9A877"/></linearGradient>
+      </defs>
+      <path d="M0 150 C200 100 380 130 560 150 S900 110 1200 140 V240 H0 Z" fill="url(#dune1)"/>
+      <path d="M0 200 C180 170 420 185 640 200 S1000 175 1200 195 V240 H0 Z" fill="url(#dune2)"/>
+      <!-- 해초 -->
+      <g fill="none" stroke="#B8B04A" stroke-width="7" stroke-linecap="round">
+        <path d="M60 210 C50 170 80 150 66 110 S80 60 70 30"/>
+        <path d="M86 210 C96 175 72 150 92 120 S84 80 100 55"/>
+        <path d="M1120 205 C1110 170 1140 150 1126 115 S1140 70 1130 45"/>
+        <path d="M1146 205 C1156 175 1132 152 1150 125"/>
+      </g>
+      <!-- 산호 -->
+      <g fill="#E79BB0">
+        <circle cx="150" cy="200" r="18"/><circle cx="172" cy="188" r="14"/><circle cx="132" cy="186" r="12"/><circle cx="160" cy="172" r="10"/>
+        <circle cx="1040" cy="198" r="20"/><circle cx="1064" cy="184" r="14"/><circle cx="1020" cy="182" r="12"/>
+      </g>
+      <g fill="#C9C3E8">
+        <circle cx="230" cy="212" r="12"/><circle cx="246" cy="202" r="9"/>
+        <circle cx="960" cy="210" r="13"/><circle cx="944" cy="200" r="9"/>
+      </g>
+    </svg>
+
+    <div class="hero-body" id="top">
+      <p class="kicker"><a href="consulting.html" style="text-decoration:none">창업 컨설팅</a> · <a href="lecture.html" style="text-decoration:none">강의</a> · <a href="shop.html" style="text-decoration:none">쇼핑몰 창업</a> · <a href="smallbiz.html" style="text-decoration:none">소상공인 지원</a></p>
+      <h1 class="headline">창업나침반</h1>
+      <p class="sub">아이디어가 매출이 되기까지, 창업을 준비하는 분과 사장님 곁에서 방향을 함께 찾습니다.</p>
+      <a class="chrome" href="#contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 L13 13 L8.5 15.5 L11 11 Z" fill="currentColor"/></svg>
+        <span>어떤 창업을 준비하고 계세요?</span>
+        <b>상담 신청</b>
+      </a>
+    </div>
+  </header>
+
+  <section class="sec" id="services">
+    <div class="sec-head">
+      <p class="kicker">SERVICES</p>
+      <h2>창업나침반이 하는 일</h2>
+      <p>창업 준비부터 온라인 판매, 가게 운영까지 필요한 순간에 맞춰 돕습니다.</p>
+    </div>
+    <div class="cards">
+      <article class="glass card t-rose">
+        <div class="orb o-rose"><svg viewBox="0 0 24 24" fill="#fff"><path d="M13 2 L5 13 h6 l-1 9 8-11 h-6 z"/></svg></div>
+        <p class="tag">CONSULTING</p>
+        <h3><a href="consulting.html" style="text-decoration:none">창업 컨설팅</a></h3>
+        <p>아이템 검증부터 사업계획서, 지원사업 준비까지 창업 초기를 정리합니다.</p>
+        <ul><li>아이템 점검·시장 분석</li><li>사업계획서 코칭</li><li>창업 지원사업 준비</li></ul>
+        <a class="more" href="consulting.html">자세히 보기 →</a>
+      </article>
+      <article class="glass card t-amber">
+        <div class="orb o-amber"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3 L1 9 l11 6 9-4.9 V17 h2 V9 z"/><path d="M5 13.2 V17 c0 1.7 3.1 3 7 3 s7-1.3 7-3 v-3.8 l-7 3.8 z"/></svg></div>
+        <p class="tag">LECTURE</p>
+        <h3><a href="lecture.html" style="text-decoration:none">강의</a></h3>
+        <p>창업 기초부터 온라인 쇼핑몰 실무까지, 현장 사례로 바로 써먹는 강의를 합니다.</p>
+        <ul><li>창업 기초·비즈니스 모델</li><li>온라인 쇼핑몰 운영 실무</li><li>대학·기관·소상공인 맞춤 과정</li></ul>
+        <a class="more" href="lecture.html">커리큘럼 보기 →</a>
+      </article>
+      <article class="glass card t-lilac">
+        <div class="orb o-lilac"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 8 h16 l-1.4 13 H5.4 z"/><path d="M8 9 V7 a4 4 0 0 1 8 0 v2" fill="none" stroke="#fff" stroke-width="2"/></svg></div>
+        <p class="tag">ONLINE STORE</p>
+        <h3><a href="shop.html" style="text-decoration:none">쇼핑몰 창업</a></h3>
+        <p>상품 소싱부터 스토어 개설, 상세페이지, 마케팅까지 단계별로 안내합니다.</p>
+        <ul><li>스마트스토어·자사몰 개설</li><li>상품 기획·상세페이지</li><li>광고·SNS 마케팅 기초</li></ul>
+        <a class="more" href="shop.html">커리큘럼 보기 →</a>
+      </article>
+      <article class="glass card t-mint">
+        <div class="orb o-mint"><svg viewBox="0 0 24 24" fill="#fff"><path d="M3 9 L5 4 h14 l2 5 z"/><path d="M4 10 h16 v10 h-6 v-5 h-4 v5 H4 z"/></svg></div>
+        <p class="tag">SMALL BUSINESS</p>
+        <h3><a href="smallbiz.html" style="text-decoration:none">소상공인 지원</a></h3>
+        <p>가게를 운영 중인 사장님과 온라인 판로 확대, 운영 개선을 함께 찾습니다.</p>
+        <ul><li>온라인 판로 개척</li><li>매장 운영·홍보 개선</li><li>교육과 1:1 상담</li></ul>
+        <a class="more" href="smallbiz.html">자세히 보기 →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="process">
+    <div class="sec-head">
+      <p class="kicker">ROADMAP</p>
+      <h2>상담부터 성장까지, 한 길로</h2>
+      <p>처음 상담부터 매출이 나기까지 보통 이 순서로 함께 갑니다.</p>
+    </div>
+    <div class="glass road-wrap">
+      <svg class="road" viewBox="0 0 1000 220" aria-hidden="true">
+        <defs>
+          <linearGradient id="roadg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8E86B4"/><stop offset=".5" stop-color="#E9E6F5"/><stop offset="1" stop-color="#8E86B4"/></linearGradient>
+        </defs>
+        <path d="M-20 170 C120 170 140 60 280 70 S440 180 540 160 S700 40 800 60 S940 150 1020 120" fill="none" stroke="#2A2450" stroke-width="44" stroke-linecap="round"/>
+        <path d="M-20 170 C120 170 140 60 280 70 S440 180 540 160 S700 40 800 60 S940 150 1020 120" fill="none" stroke="url(#roadg)" stroke-width="34" stroke-linecap="round" opacity=".9"/>
+        <path d="M-20 170 C120 170 140 60 280 70 S440 180 540 160 S700 40 800 60 S940 150 1020 120" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="14 12"/>
+        <g fill="#FFFFFF" stroke="#7C62C9" stroke-width="4">
+          <circle cx="100" cy="150" r="13"/><circle cx="280" cy="70" r="13"/><circle cx="500" cy="168" r="13"/><circle cx="760" cy="58" r="13"/><circle cx="930" cy="132" r="13"/>
+        </g>
+        <g fill="#3FD08A"><path d="M930 98 l0 -28 l22 9 z"/><rect x="928" y="70" width="3" height="50"/></g>
+      </svg>
+      <ol class="steps">
+        <li><strong>상담</strong><span>지금 상황과 목표를 듣습니다</span></li>
+        <li><strong>진단</strong><span>아이템·시장·강점을 점검합니다</span></li>
+        <li><strong>계획</strong><span>사업계획과 일정을 세웁니다</span></li>
+        <li><strong>실행</strong><span>오픈·지원사업·홍보를 시작합니다</span></li>
+        <li><strong>성장</strong><span>매출을 보며 다음 단계로</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="who">
+    <div class="sec-head">
+      <p class="kicker">FOR YOU</p>
+      <h2>이런 분과 함께합니다</h2>
+    </div>
+    <div class="who">
+      <div class="glass"><strong>예비 창업자</strong><span>아이디어는 있는데 어디서부터 시작할지 모르는 분</span></div>
+      <div class="glass"><strong>온라인 판매 입문자</strong><span>내 상품으로 쇼핑몰을 열고 싶은 분</span></div>
+      <div class="glass"><strong>소상공인 사장님</strong><span>매장을 넘어 판로를 넓히고 싶은 분</span></div>
+    </div>
+  </section>
+
+  <section class="glass contact" id="contact">
+    <p class="kicker">CONTACT</p>
+    <h2>방향이 막막하다면, 창업나침반에 물어보세요</h2>
+    <p>창업 상담, 강의 요청, 소상공인 교육 문의를 받습니다.</p>
+    <div class="kakao">
+      <a class="qr" href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅 QR코드"><img src="images/kakao-qr.png" alt="카카오톡 오픈채팅 문의 QR코드" width="480" height="480"></a>
+      <div class="kakao-txt">
+        <strong>카카오톡으로 편하게 문의하세요</strong>
+        <span>휴대폰 카메라로 QR코드를 찍거나, 아래 버튼을 누르면 오픈채팅방으로 연결됩니다.</span>
+        <a class="kakao-btn" href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>오픈채팅 바로가기</a>
+      </div>
+    </div>
+    <dl>
+      <dt>카카오톡</dt><dd><a href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener">오픈채팅 문의</a></dd>
+      <dt>이메일</dt><dd><a href="mailto:sstartcompass@gmail.com">sstartcompass@gmail.com</a></dd>
+      <dt>블로그</dt><dd><a href="https://luna88.tistory.com" target="_blank" rel="noopener">luna88.tistory.com</a></dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>© 창업나침반</span>
+    <span>대표 임윤경</span>
+  </footer>
+</div>
+
+</body>
+</html>
