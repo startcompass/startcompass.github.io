@@ -4,357 +4,205 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>강의 · 창업나침반</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap">
-<style>
-  :root {
-    --night: #15122A;
-    --sky-top: #5E4FAE;
-    --sky-mid: #9A8AD8;
-    --sky-low: #F2D9B4;
-    --white: #FFFFFF;
-    --text: #EEEAFB;
-    --muted: #B3AACF;
-    --glass: rgba(255, 255, 255, .10);
-    --glass-line: rgba(255, 255, 255, .28);
-    --font: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-    --font-round: "Jua", "Gowun Dodum", sans-serif;
-    color-scheme: dark;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--night);
-    background-image:
-      radial-gradient(60% 40% at 15% 40%, rgba(123, 92, 220, .25), transparent 70%),
-      radial-gradient(50% 35% at 90% 75%, rgba(212, 166, 92, .14), transparent 70%);
-    color: var(--text);
-    font-family: var(--font);
-    font-size: 15px;
-    line-height: 1.7;
-    word-break: keep-all;
-  }
-  .page {
-    max-width: 1100px; margin: 0 auto;
-    padding-block: 16px 48px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    display: grid; gap: 64px;
-  }
-  h1, h2, h3 { margin: 0; font-family: var(--font-round); font-weight: 400; text-wrap: balance; }
-  p { margin: 0; }
-  ul, ol { margin: 0; padding: 0; list-style: none; }
-  a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
-
-  /* 히어로 */
-  .hero {
-    position: relative; overflow: hidden; border-radius: 32px;
-    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-low) 100%);
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px; }
-  .logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-round); font-size: 19px; color: var(--white); text-decoration: none; }
-  .logo svg { width: 26px; height: 26px; }
-  .nav-right { display: flex; align-items: center; gap: 18px; }
-  .nav-right .link { font-family: var(--font-round); color: rgba(255,255,255,.88); text-decoration: none; font-size: 15px; }
-  .nav-right .link:hover { color: var(--white); }
-  .nav-right .link[aria-current="page"] { color: var(--white); text-decoration: underline; text-underline-offset: 6px; }
-  @media (max-width: 900px) { .nav-right .link { display: none; } }
-  .pill-btn { font-family: var(--font-round); background: var(--white); color: #1B1730; border-radius: 999px; padding: 9px 18px; font-size: 14px; text-decoration: none; }
-  .hero-body { display: grid; justify-items: center; text-align: center; gap: 16px; padding: 40px 20px 64px; }
-  .orb {
-    width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center;
-    background: radial-gradient(circle at 32% 28%, #FFFFFF 0 8%, #F2D49A 30%, #B07F2E 80%);
-    box-shadow: inset -8px -10px 18px rgba(0,0,0,.25), inset 6px 8px 14px rgba(255,255,255,.7), 0 12px 24px -8px rgba(0,0,0,.5);
-  }
-  .orb svg { width: 40px; height: 40px; }
-  .kicker { font-size: 13px; letter-spacing: .14em; color: rgba(255,255,255,.85); }
-  .headline { font-size: clamp(36px, 6vw, 68px); line-height: 1.1; color: var(--white); text-shadow: 0 6px 30px rgba(40,20,90,.35); }
-  .sub { color: rgba(255,255,255,.94); font-size: clamp(15px, 1.8vw, 18px); max-width: 32em; text-shadow: 0 2px 12px rgba(40,20,90,.3); }
-  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
-  .chips a {
-    font-family: var(--font-round); text-decoration: none; font-size: 14px;
-    padding: 8px 14px; border-radius: 999px; color: #2B2450;
-    background: linear-gradient(180deg, #FFFFFF 0%, #E4E0F0 55%, #F7F6FB 100%);
-    box-shadow: 0 8px 18px -10px rgba(30,20,70,.6);
-  }
-  .chips a:hover { background: var(--white); }
-
-  /* 섹션 */
-  .sec { display: grid; gap: 28px; scroll-margin-top: 16px; }
-  .sec-head { display: grid; gap: 8px; justify-items: center; text-align: center; }
-  .sec-head .kicker { color: var(--muted); }
-  .sec-head h2 { font-size: clamp(26px, 3.6vw, 40px); color: var(--white); }
-  .sec-head p { color: var(--muted); max-width: 36em; }
-
-  .glass {
-    background: var(--glass); border: 1px solid var(--glass-line); border-radius: 24px;
-    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 20px 50px -30px rgba(0,0,0,.8);
-  }
-
-  /* 단계 지도 */
-  .path { padding: 24px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
-  .path a { display: grid; gap: 6px; justify-items: center; text-align: center; text-decoration: none; padding: 10px 4px; border-radius: 16px; }
-  .path a:hover { background: rgba(255,255,255,.08); }
-  .path .dot { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-round); font-size: 18px; color: #1B1730; }
-  .path strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 15px; }
-  .path span { color: var(--muted); font-size: 12px; }
-
-  /* 트랙 */
-  .tracks { display: grid; gap: 20px; }
-  .track { padding: 28px; display: grid; grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 28px; scroll-margin-top: 16px; }
-  .track-info { display: grid; gap: 10px; align-content: start; }
-  .badge { justify-self: start; font-family: var(--font-round); font-size: 13px; padding: 4px 12px; border-radius: 999px; color: #1B1730; }
-  .track h3 { font-size: 26px; color: var(--white); line-height: 1.25; }
-  .track-info p { color: var(--muted); font-size: 14px; }
-  .meta { display: grid; gap: 4px; font-size: 13px; color: var(--muted); padding-top: 10px; border-top: 1px solid var(--glass-line); }
-  .meta b { font-weight: 400; color: var(--white); margin-right: 6px; }
-  .sessions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; counter-reset: n; }
-  .sessions li {
-    counter-increment: n;
-    display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 12px; align-items: start;
-    padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-  }
-  .sessions li::before {
-    content: counter(n) "강";
-    font-family: var(--font-round); font-size: 13px; color: #1B1730;
-    width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; grid-row: span 2;
-    background: var(--white);
-  }
-  .sessions strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 15px; }
-  .sessions span { color: var(--muted); font-size: 13px; }
-
-  .c1 { background: #F4C3D3; } .c2 { background: #F2D49A; } .c3 { background: #CDBDF6; }
-  .c4 { background: #B7EED2; } .c5 { background: #A9D8F5; } .c6 { background: #F5BFA8; }
-
-  /* 운영 방식 */
-  .formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .formats article { padding: 24px; display: grid; gap: 8px; align-content: start; }
-  .formats h3 { font-size: 21px; color: var(--white); }
-  .formats .time { font-family: var(--font-round); color: #F2D49A; font-size: 14px; }
-  .formats p { color: var(--muted); font-size: 14px; }
-
-  .who { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .who div { padding: 22px; display: grid; gap: 6px; }
-  .who strong { font-family: var(--font-round); font-weight: 400; color: var(--white); font-size: 18px; }
-  .who span { color: var(--muted); font-size: 14px; }
-
-  .cta { padding: 40px 28px; display: grid; justify-items: center; text-align: center; gap: 16px; background: linear-gradient(160deg, rgba(212,166,92,.3), rgba(255,255,255,.05)); }
-  .cta h2 { font-size: clamp(24px, 3.4vw, 36px); color: var(--white); }
-  .cta p { color: var(--muted); }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .btn { font-family: var(--font-round); border-radius: 999px; padding: 12px 22px; text-decoration: none; font-size: 15px; }
-  .btn.dark { background: #111018; color: var(--white); border: 1px solid var(--glass-line); }
-  .btn.light { background: var(--white); color: #1B1730; }
-
-  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; padding-top: 16px; border-top: 1px solid var(--glass-line); }
-
-  @media (max-width: 900px) {
-    .path { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .track { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-    .formats, .who { grid-template-columns: minmax(0, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .path { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px; }
-    .sessions { grid-template-columns: minmax(0, 1fr); }
-    .track { padding: 22px 18px; }
-    .hero-body { padding: 28px 4px 48px; }
-  }
-</style>
+<meta name="description" content="창업 기초부터 온라인 쇼핑몰 실무까지, 대학·기관·소상공인 교육 현장에 맞춘 강의 커리큘럼.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="page">
-
-  <header class="hero">
-    <nav class="nav" aria-label="주 메뉴">
-      <a class="logo" href="index.html">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M16 5 L19.5 16 L12.5 16 Z" fill="#fff"/><path d="M16 27 L19.5 16 L12.5 16 Z" fill="#fff" opacity=".55"/></svg>
-        창업나침반
-      </a>
-      <div class="nav-right">
-        <a class="link" href="consulting.html">창업 컨설팅</a>
-        <a class="link" href="lecture.html" aria-current="page">강의</a>
-        <a class="link" href="shop.html">쇼핑몰 창업</a>
-        <a class="link" href="smallbiz.html">소상공인 지원</a>
-        <a class="pill-btn" href="index.html">← 홈으로</a>
-      </div>
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.6"/><path d="M16 5.5 L19.6 16 L12.4 16 Z" fill="currentColor"/><path d="M16 26.5 L19.6 16 L12.4 16 Z" fill="currentColor" opacity=".4"/></svg>창업나침반</a>
+    <nav class="menu" aria-label="주 메뉴">
+      <a href="consulting.html">창업 컨설팅</a>
+      <a href="lecture.html" aria-current="page">강의</a>
+      <a href="shop.html">쇼핑몰 창업</a>
+      <a href="smallbiz.html">소상공인 지원</a>
     </nav>
-    <div class="hero-body">
-      <div class="orb"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 3 L1 9 l11 6 9-4.9 V17 h2 V9 z"/><path d="M5 13.2 V17 c0 1.7 3.1 3 7 3 s7-1.3 7-3 v-3.8 l-7 3.8 z"/></svg></div>
-      <p class="kicker">LECTURE</p>
-      <h1 class="headline">강의</h1>
-      <p class="sub">창업 기초부터 온라인 쇼핑몰 실무까지. 대학, 기관, 소상공인 교육 현장에 맞춰 과정을 골라 구성합니다.</p>
-      <nav class="chips" aria-label="강의 과정 바로가기">
-        <a href="#t1">창업 기초</a>
-        <a href="#t2">사업계획서·지원사업</a>
-        <a href="#t3">브랜딩·SNS 마케팅</a>
-        <a href="#t4">온라인 쇼핑몰 실무</a>
-        <a href="#t5">AI 활용 창업</a>
-        <a href="#t6">소상공인 디지털 전환</a>
-      </nav>
+    <a class="btn btn-accent btn-sm" href="index.html#contact">상담 문의</a>
+  </div>
+</header>
+<main>
+<section class="page-hero">
+  <div class="txt">
+    <p class="crumb"><a href="index.html">홈</a> / 강의</p>
+    <div>
+      <h1>강의<span class="o">.</span></h1>
+      <p class="lead">창업 기초부터 온라인 쇼핑몰 실무까지. 대학, 기관, 소상공인 교육 현장에 맞춰 과정을 골라 구성합니다.</p>
+      <div class="actions">
+        <a class="btn btn-accent" href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>강의 문의</a>
+        <a class="btn btn-ghost" href="#curriculum">커리큘럼 보기</a>
+      </div>
     </div>
-  </header>
-
-  <section class="sec">
+    <div class="jump"><a href="#t1">창업 기초</a><a href="#t2">사업계획서 · 지원사업</a><a href="#t3">브랜딩 · SNS 마케팅</a><a href="#t4">온라인 쇼핑몰 실무</a><a href="#t5">AI 활용 창업</a><a href="#t6">소상공인 디지털 전환</a></div>
+  </div>
+  <div class="ph"><img src="images/lecture.jpg" alt="세미나실에서 강의를 듣는 사람들" width="1280" height="854"></div>
+</section>
+<div class="marquee" aria-hidden="true"><div class="track"><span>창업 기초</span><span>사업계획서 · 지원사업</span><span>브랜딩 · SNS 마케팅</span><span>온라인 쇼핑몰 실무</span><span>AI 활용 창업</span><span>소상공인 디지털 전환</span><span>창업 기초</span><span>사업계획서 · 지원사업</span><span>브랜딩 · SNS 마케팅</span><span>온라인 쇼핑몰 실무</span><span>AI 활용 창업</span><span>소상공인 디지털 전환</span><span>창업 기초</span><span>사업계획서 · 지원사업</span><span>브랜딩 · SNS 마케팅</span><span>온라인 쇼핑몰 실무</span><span>AI 활용 창업</span><span>소상공인 디지털 전환</span><span>창업 기초</span><span>사업계획서 · 지원사업</span><span>브랜딩 · SNS 마케팅</span><span>온라인 쇼핑몰 실무</span><span>AI 활용 창업</span><span>소상공인 디지털 전환</span></div></div>
+<section class="section dark" id="curriculum">
+  <div class="wrap">
     <div class="sec-head">
-      <p class="kicker">CURRICULUM MAP</p>
-      <h2>아이디어에서 온라인 매출까지</h2>
+      <p class="label">Curriculum</p>
+      <h2>과정별<br>커리큘럼</h2>
       <p>6개 과정은 순서대로 이어 들어도 되고, 필요한 과정만 골라 들어도 됩니다.</p>
     </div>
-    <div class="glass path">
-      <a href="#t1"><span class="dot c1">1</span><strong>창업 기초</strong><span>아이템·모델</span></a>
-      <a href="#t2"><span class="dot c2">2</span><strong>사업계획서</strong><span>지원사업·피칭</span></a>
-      <a href="#t3"><span class="dot c3">3</span><strong>브랜딩</strong><span>SNS 마케팅</span></a>
-      <a href="#t4"><span class="dot c4">4</span><strong>쇼핑몰 실무</strong><span>개설·판매·광고</span></a>
-      <a href="#t5"><span class="dot c5">5</span><strong>AI 활용</strong><span>기획·콘텐츠</span></a>
-      <a href="#t6"><span class="dot c6">6</span><strong>디지털 전환</strong><span>소상공인</span></a>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="sec-head">
-      <p class="kicker">COURSES</p>
-      <h2>과정별 커리큘럼</h2>
-    </div>
-    <div class="tracks">
-
-      <article class="glass track" id="t1">
-        <div class="track-info">
-          <span class="badge c1">입문</span>
+    <div>
+      <article class="course" id="t1">
+        <div class="course-info">
+          <span class="tag">입문</span>
           <h3>창업 기초</h3>
           <p>창업이 처음인 분이 아이디어를 사업 모델로 바꾸는 과정입니다.</p>
-          <div class="meta"><span><b>대상</b>대학생, 예비 창업자</span><span><b>구성</b>6강</span></div>
+          <div class="course-meta"><span><b>대상</b>대학생, 예비 창업자</span><span><b>구성</b>6강</span></div>
         </div>
         <ol class="sessions">
-          <li><strong>창업, 무엇부터 할까</strong><span>창업의 흐름과 준비 순서</span></li>
-          <li><strong>아이템 발굴</strong><span>생활 속 문제에서 아이디어 찾기</span></li>
-          <li><strong>고객과 문제 정의</strong><span>누구의 어떤 문제를 풀까</span></li>
-          <li><strong>시장 조사</strong><span>경쟁 상품·가격·트렌드 분석</span></li>
-          <li><strong>비즈니스 모델 캔버스</strong><span>한 장으로 그리는 사업 구조</span></li>
-          <li><strong>작게 시작하기</strong><span>MVP로 빠르게 검증하는 법</span></li>
+          <li><span class="n">01</span><strong>창업, 무엇부터 할까</strong><span>창업의 흐름과 준비 순서</span></li>
+          <li><span class="n">02</span><strong>아이템 발굴</strong><span>생활 속 문제에서 아이디어 찾기</span></li>
+          <li><span class="n">03</span><strong>고객과 문제 정의</strong><span>누구의 어떤 문제를 풀까</span></li>
+          <li><span class="n">04</span><strong>시장 조사</strong><span>경쟁 상품·가격·트렌드 분석</span></li>
+          <li><span class="n">05</span><strong>비즈니스 모델 캔버스</strong><span>한 장으로 그리는 사업 구조</span></li>
+          <li><span class="n">06</span><strong>작게 시작하기</strong><span>MVP로 빠르게 검증하는 법</span></li>
         </ol>
       </article>
-
-      <article class="glass track" id="t2">
-        <div class="track-info">
-          <span class="badge c2">기본</span>
+      <article class="course" id="t2">
+        <div class="course-info">
+          <span class="tag">기본</span>
           <h3>사업계획서 · 지원사업</h3>
           <p>정부·지자체 창업 지원사업에 도전할 수 있도록 계획서와 발표를 준비합니다.</p>
-          <div class="meta"><span><b>대상</b>예비·초기 창업자</span><span><b>구성</b>5강</span></div>
+          <div class="course-meta"><span><b>대상</b>예비·초기 창업자</span><span><b>구성</b>5강</span></div>
         </div>
         <ol class="sessions">
-          <li><strong>창업 지원사업 한눈에 보기</strong><span>종류, 일정, 나에게 맞는 사업 찾기</span></li>
-          <li><strong>사업계획서 구조 잡기</strong><span>심사위원이 보는 핵심 항목</span></li>
-          <li><strong>시장·경쟁 분석 쓰기</strong><span>근거 있는 숫자로 설득하기</span></li>
-          <li><strong>매출·자금 계획</strong><span>초보자를 위한 재무 계획</span></li>
-          <li><strong>발표와 피칭</strong><span>짧고 분명하게 전달하는 법</span></li>
+          <li><span class="n">01</span><strong>창업 지원사업 한눈에 보기</strong><span>종류, 일정, 나에게 맞는 사업 찾기</span></li>
+          <li><span class="n">02</span><strong>사업계획서 구조 잡기</strong><span>심사위원이 보는 핵심 항목</span></li>
+          <li><span class="n">03</span><strong>시장·경쟁 분석 쓰기</strong><span>근거 있는 숫자로 설득하기</span></li>
+          <li><span class="n">04</span><strong>매출·자금 계획</strong><span>초보자를 위한 재무 계획</span></li>
+          <li><span class="n">05</span><strong>발표와 피칭</strong><span>짧고 분명하게 전달하는 법</span></li>
         </ol>
       </article>
-
-      <article class="glass track" id="t3">
-        <div class="track-info">
-          <span class="badge c3">기본</span>
+      <article class="course" id="t3">
+        <div class="course-info">
+          <span class="tag">기본</span>
           <h3>브랜딩 · SNS 마케팅</h3>
           <p>작은 가게와 1인 브랜드가 고객에게 기억되는 방법을 배웁니다.</p>
-          <div class="meta"><span><b>대상</b>창업자, 소상공인</span><span><b>구성</b>6강</span></div>
+          <div class="course-meta"><span><b>대상</b>창업자, 소상공인</span><span><b>구성</b>6강</span></div>
         </div>
         <ol class="sessions">
-          <li><strong>브랜드 콘셉트 잡기</strong><span>우리만의 이야기와 차별점</span></li>
-          <li><strong>네이밍과 디자인 방향</strong><span>이름·로고·컬러 정하기</span></li>
-          <li><strong>인스타그램 운영</strong><span>피드 기획과 꾸준한 발행</span></li>
-          <li><strong>블로그 마케팅</strong><span>검색에 걸리는 글쓰기</span></li>
-          <li><strong>사진·숏폼 콘텐츠</strong><span>스마트폰으로 찍고 편집하기</span></li>
-          <li><strong>리뷰와 단골 관리</strong><span>후기가 쌓이는 구조 만들기</span></li>
+          <li><span class="n">01</span><strong>브랜드 콘셉트 잡기</strong><span>우리만의 이야기와 차별점</span></li>
+          <li><span class="n">02</span><strong>네이밍과 디자인 방향</strong><span>이름·로고·컬러 정하기</span></li>
+          <li><span class="n">03</span><strong>인스타그램 운영</strong><span>피드 기획과 꾸준한 발행</span></li>
+          <li><span class="n">04</span><strong>블로그 마케팅</strong><span>검색에 걸리는 글쓰기</span></li>
+          <li><span class="n">05</span><strong>사진·숏폼 콘텐츠</strong><span>스마트폰으로 찍고 편집하기</span></li>
+          <li><span class="n">06</span><strong>리뷰와 단골 관리</strong><span>후기가 쌓이는 구조 만들기</span></li>
         </ol>
       </article>
-
-      <article class="glass track" id="t4">
-        <div class="track-info">
-          <span class="badge c4">실무</span>
+      <article class="course" id="t4">
+        <div class="course-info">
+          <span class="tag">실무</span>
           <h3>온라인 쇼핑몰 실무</h3>
           <p>상품 소싱부터 스토어 개설, 판매, 광고, 운영까지 쇼핑몰 창업의 전 과정을 실습합니다.</p>
-          <div class="meta"><span><b>대상</b>온라인 판매 입문자</span><span><b>구성</b>8강</span></div>
+          <div class="course-meta"><span><b>대상</b>온라인 판매 입문자</span><span><b>구성</b>8강</span></div>
         </div>
         <ol class="sessions">
-          <li><strong>온라인 판매 시작하기</strong><span>채널별 특징과 판매 구조</span></li>
-          <li><strong>상품 소싱</strong><span>도매·제조·위탁 판매 이해</span></li>
-          <li><strong>스마트스토어 개설</strong><span>가입부터 기본 설정까지</span></li>
-          <li><strong>상품 등록과 검색 최적화</strong><span>잘 보이는 상품명·태그</span></li>
-          <li><strong>상세페이지 기획</strong><span>사고 싶게 만드는 구성</span></li>
-          <li><strong>광고 운영 기초</strong><span>검색 광고와 예산 관리</span></li>
-          <li><strong>주문·배송·CS</strong><span>운영 실무와 정산</span></li>
-          <li><strong>자사몰로 확장하기</strong><span>채널 확장과 재구매 전략</span></li>
+          <li><span class="n">01</span><strong>온라인 판매 시작하기</strong><span>채널별 특징과 판매 구조</span></li>
+          <li><span class="n">02</span><strong>상품 소싱</strong><span>도매·제조·위탁 판매 이해</span></li>
+          <li><span class="n">03</span><strong>스마트스토어 개설</strong><span>가입부터 기본 설정까지</span></li>
+          <li><span class="n">04</span><strong>상품 등록과 검색 최적화</strong><span>잘 보이는 상품명·태그</span></li>
+          <li><span class="n">05</span><strong>상세페이지 기획</strong><span>사고 싶게 만드는 구성</span></li>
+          <li><span class="n">06</span><strong>광고 운영 기초</strong><span>검색 광고와 예산 관리</span></li>
+          <li><span class="n">07</span><strong>주문·배송·CS</strong><span>운영 실무와 정산</span></li>
+          <li><span class="n">08</span><strong>자사몰로 확장하기</strong><span>채널 확장과 재구매 전략</span></li>
         </ol>
       </article>
-
-      <article class="glass track" id="t5">
-        <div class="track-info">
-          <span class="badge c5">심화</span>
+      <article class="course" id="t5">
+        <div class="course-info">
+          <span class="tag">심화</span>
           <h3>AI 활용 창업</h3>
           <p>생성형 AI로 기획, 콘텐츠 제작, 반복 업무를 빠르게 처리하는 법을 실습합니다.</p>
-          <div class="meta"><span><b>대상</b>창업자, 쇼핑몰 운영자</span><span><b>구성</b>4강</span></div>
+          <div class="course-meta"><span><b>대상</b>창업자, 쇼핑몰 운영자</span><span><b>구성</b>4강</span></div>
         </div>
         <ol class="sessions">
-          <li><strong>AI와 함께 아이템 기획</strong><span>시장 조사·아이디어 정리</span></li>
-          <li><strong>상세페이지·광고 문구</strong><span>AI로 카피 쓰고 다듬기</span></li>
-          <li><strong>이미지·콘텐츠 제작</strong><span>상품 사진·SNS 이미지 만들기</span></li>
-          <li><strong>업무 자동화</strong><span>CS 답변·정리 업무 줄이기</span></li>
+          <li><span class="n">01</span><strong>AI와 함께 아이템 기획</strong><span>시장 조사·아이디어 정리</span></li>
+          <li><span class="n">02</span><strong>상세페이지·광고 문구</strong><span>AI로 카피 쓰고 다듬기</span></li>
+          <li><span class="n">03</span><strong>이미지·콘텐츠 제작</strong><span>상품 사진·SNS 이미지 만들기</span></li>
+          <li><span class="n">04</span><strong>업무 자동화</strong><span>CS 답변·정리 업무 줄이기</span></li>
         </ol>
       </article>
-
-      <article class="glass track" id="t6">
-        <div class="track-info">
-          <span class="badge c6">맞춤</span>
+      <article class="course" id="t6">
+        <div class="course-info">
+          <span class="tag">맞춤</span>
           <h3>소상공인 디지털 전환</h3>
           <p>매장을 운영하는 사장님이 온라인으로 손님을 모으고 판로를 넓히는 과정입니다.</p>
-          <div class="meta"><span><b>대상</b>소상공인 사장님</span><span><b>구성</b>4강</span></div>
+          <div class="course-meta"><span><b>대상</b>소상공인 사장님</span><span><b>구성</b>4강</span></div>
         </div>
         <ol class="sessions">
-          <li><strong>지도·플레이스 관리</strong><span>검색되는 가게 정보 만들기</span></li>
-          <li><strong>리뷰·예약 관리</strong><span>손님 후기를 매출로 연결</span></li>
-          <li><strong>온라인 판로 열기</strong><span>스토어·라이브커머스 입문</span></li>
-          <li><strong>소상공인 지원 제도 활용</strong><span>교육·자금 지원 찾아보기</span></li>
+          <li><span class="n">01</span><strong>지도·플레이스 관리</strong><span>검색되는 가게 정보 만들기</span></li>
+          <li><span class="n">02</span><strong>리뷰·예약 관리</strong><span>손님 후기를 매출로 연결</span></li>
+          <li><span class="n">03</span><strong>온라인 판로 열기</strong><span>스토어·라이브커머스 입문</span></li>
+          <li><span class="n">04</span><strong>소상공인 지원 제도 활용</strong><span>교육·자금 지원 찾아보기</span></li>
         </ol>
       </article>
-
     </div>
-  </section>
-
-  <section class="sec">
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
     <div class="sec-head">
-      <p class="kicker">FORMAT</p>
-      <h2>이렇게 운영할 수 있어요</h2>
+      <p class="label">Format</p>
+      <h2>운영 방식</h2>
       <p>교육 대상과 일정에 맞춰 과정과 회차를 조합합니다.</p>
     </div>
     <div class="formats">
-      <article class="glass"><span class="time">1회 · 2~3시간</span><h3>특강</h3><p>한 가지 주제를 집중해서 다룹니다. 행사, 세미나, 동아리 특강에 맞습니다.</p></article>
-      <article class="glass"><span class="time">4~8회</span><h3>단기 과정</h3><p>한 과정을 처음부터 끝까지 실습합니다. 기관·지자체 교육 프로그램에 맞습니다.</p></article>
-      <article class="glass"><span class="time">한 학기</span><h3>정규 강의</h3><p>여러 과정을 묶어 학기 수업으로 구성합니다. 팀 프로젝트와 발표를 포함할 수 있습니다.</p></article>
+      <article><span class="time">1회 · 2~3시간</span><h3>특강</h3><p>한 가지 주제를 집중해서 다룹니다. 행사, 세미나, 동아리 특강에 맞습니다.</p></article>
+      <article><span class="time">4~8회</span><h3>단기 과정</h3><p>한 과정을 처음부터 끝까지 실습합니다. 기관·지자체 교육 프로그램에 맞습니다.</p></article>
+      <article><span class="time">한 학기</span><h3>정규 강의</h3><p>여러 과정을 묶어 학기 수업으로 구성합니다. 팀 프로젝트와 발표를 포함할 수 있습니다.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">For you</p>
+      <h2>이런 곳에서<br>강의합니다</h2>
     </div>
     <div class="who">
-      <div class="glass"><strong>대학</strong><span>창업 교양·전공 수업, 창업 동아리, 학생 창업 프로젝트</span></div>
-      <div class="glass"><strong>기관·지자체</strong><span>창업 지원센터, 여성·청년·중장년 창업 교육</span></div>
-      <div class="glass"><strong>소상공인</strong><span>상인회, 소상공인 지원센터 교육과 실습</span></div>
+      <div><span class="k">01</span><strong>대학</strong><span>창업 교양·전공 수업, 창업 동아리, 학생 창업 프로젝트</span></div>
+      <div><span class="k">02</span><strong>기관·지자체</strong><span>창업 지원센터, 여성·청년·중장년 창업 교육</span></div>
+      <div><span class="k">03</span><strong>소상공인</strong><span>상인회, 소상공인 지원센터 교육과 실습</span></div>
     </div>
-  </section>
-
-  <section class="glass cta">
-    <p class="kicker">CONTACT</p>
-    <h2>교육 대상에 맞춰 커리큘럼을 짜 드려요</h2>
+  </div>
+</section>
+<section class="cta orange">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2 style="margin-top:20px">우리에게 맞는<br>커리큘럼으로.</h2>
     <p>인원, 일정, 원하는 주제를 알려 주시면 맞춤 과정을 제안합니다.</p>
-    <div class="cta-row">
-      <a class="btn light" href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener">강의 문의하기</a>
-      <a class="btn dark" href="index.html#contact">QR코드 보기</a>
+    <div class="actions">
+      <a class="btn btn-ink" href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>강의 문의하기</a>
+      <a class="btn btn-ghost" href="index.html#contact">이메일 · 블로그</a>
     </div>
-  </section>
-
-  <footer>
-    <span>© 창업나침반</span>
-    <span>대표 임윤경</span>
-  </footer>
-</div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="index.html"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.6"/><path d="M16 5.5 L19.6 16 L12.4 16 Z" fill="currentColor"/><path d="M16 26.5 L19.6 16 L12.4 16 Z" fill="currentColor" opacity=".4"/></svg>창업나침반</a>
+      <p>대표 임윤경 · <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=sstartcompass@gmail.com" target="_blank" rel="noopener">sstartcompass@gmail.com</a></p>
+    </div>
+    <nav aria-label="하단 메뉴"><a href="consulting.html">창업 컨설팅</a><a href="lecture.html">강의</a><a href="shop.html">쇼핑몰 창업</a><a href="smallbiz.html">소상공인 지원</a><a href="https://open.kakao.com/o/sd71YtTi" target="_blank" rel="noopener">카카오톡 문의</a><a href="https://luna88.tistory.com" target="_blank" rel="noopener">블로그</a></nav>
+    <small>© 창업나침반 · 사진 출처 Pixabay</small>
+  </div>
+</footer>
+<a class="to-top" href="#" aria-label="맨 위로 올라가기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>TOP</span></a>
+<script>
+(function () {
+  var b = document.querySelector('.to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 0.8); }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>
